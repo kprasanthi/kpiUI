@@ -1,0 +1,17 @@
+<div ng-class="template" class="row metric">
+  <ul class="list-unstyled bordered col-xs-6">
+    <li>
+      {{report.metrics.numberOfColumns.name}}
+      <span class="count">{{report.metrics.numberOfColumns.count | number:0}}</span>
+    </li>
+  </ul>
+  <ul class="list-unstyled bordered col-xs-6">
+    <li>
+      {{report.metrics.columnsCategorized.name}}
+      <span class="count">
+        {{report.metrics.columnsCategorized.count | number:0 }}
+        <span class="pull-right">{{report.metrics.columnsCategorized.count | calcPercentage:0:report.metrics.numberOfColumns.count}}%</span>
+      </span>
+    </li>
+  </ul>
+</div>

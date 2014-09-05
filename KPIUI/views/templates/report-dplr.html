@@ -1,0 +1,89 @@
+<div ng-class="template" class="row metric">
+  <ul class="list-unstyled bordered col-xs-12">
+    <li class="chart">
+      <h2>servers profiled by global ids</h2>
+      <div class="col-xs-6">
+        <div class="row">
+          {{report.metrics.lastWeek.name}}
+        </div>
+        <div class="row">
+          <span class="col-xs-5 pl-0 count">
+            <span>{{report.metrics.lastWeek.count.profiledGIDS.count}} / {{report.metrics.lastWeek.count.totalGIDs.count}}</span>
+            {{report.metrics.lastWeek.count.percentProfGIDs.count | number:2}}%
+          </span>
+
+          <div class="col-xs-7 pl-0">
+            <div d3-dots-scaled
+            width="107"
+            dots-on="report.metrics.lastWeek.count.profiledGIDS.count"
+            dots-total="report.metrics.lastWeek.count.totalGIDs.count"
+            foreground-color="'#808080'"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-6 green">
+        <div class="row">
+          {{report.metrics.thisWeek.name}}
+        </div>
+        <div class="row">
+          <span class="col-xs-6 pr-0 pl-0 count green">
+            <span 
+              ng-class="{
+                'icon-arrow-grey-down' : report.metrics.thisWeek.count.percentProfGIDs.count < report.metrics.lastWeek.count.percentProfGIDs.count, 
+                'icon-arrow-green-up' : report.metrics.thisWeek.count.percentProfGIDs.count > report.metrics.lastWeek.count.percentProfGIDs.count,
+                'icon-arrow-grey-right' : report.metrics.thisWeek.count.percentProfGIDs.count === report.metrics.lastWeek.count.percentProfGIDs.count
+                }"></span>
+            <span class="green">{{report.metrics.thisWeek.count.profiledGIDS.count}} / {{report.metrics.thisWeek.count.totalGIDs.count}}</span>
+            {{report.metrics.thisWeek.count.percentProfGIDs.count | number:2}}%
+          </span>
+
+          <div class="col-xs-6 pr-0 pl-0">
+            <div d3-dots-scaled
+            width="107"
+            dots-on="report.metrics.thisWeek.count.profiledGIDS.count"
+            dots-total="report.metrics.thisWeek.count.totalGIDs.count"
+            foreground-color="'#4BA80B'"></div>
+          </div>
+        </div>
+      </div>
+    </li>
+    <li>
+      <h2>columns Categorized</h2>
+
+      <div class="row">
+        <div class="col-xs-6">
+          {{report.metrics.lastWeek.name}}
+        </div>
+        <span class="col-xs-6 count">
+          {{report.metrics.lastWeek.count.columnsCategorized.count | number:0 }} / {{report.metrics.lastWeek.count.numberOfColumns.count | number:0 }}
+          <span class="pull-right">
+            {{report.metrics.lastWeek.count.percentColsCategorized.count}}%
+          </span>
+        </span>
+      </div>
+
+      <progressbar 
+        class="dplr last-week" 
+        value="report.metrics.lastWeek.count.percentColsCategorized.count"></progressbar>
+
+      <progressbar 
+        class="dplr this-week" 
+        value="report.metrics.thisWeek.count.percentColsCategorized.count"></progressbar>
+
+
+      <div class="row">
+        <div class="col-xs-6 green">
+          {{report.metrics.thisWeek.name}}
+        </div>
+        <span class="col-xs-6 count">
+          {{report.metrics.thisWeek.count.columnsCategorized.count | number:0 }} / {{report.metrics.thisWeek.count.numberOfColumns.count | number:0 }}
+          <span class="pull-right green">
+            <span class="icon-arrow-green-up"></span>
+            {{report.metrics.thisWeek.count.percentColsCategorized.count}}%
+          </span>
+        </span>
+      </div>
+    </li>
+  </ul>
+</div>

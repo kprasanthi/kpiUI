@@ -1,0 +1,22 @@
+<div ng-class="template" class="row metric">
+  <ul class="list-unstyled bordered col-xs-3" ng-click="update()">
+    <li d3-arc 
+      width="113"
+      border="4"
+      percentage="report.total.percentCapUsed.count"
+      foreground-color="#077ab5">
+    </li>
+    <li class="title"><h2>total</h2></li>
+    <li class="count" ng-repeat="key in storageOrder">{{report.total[key].count}} <small>TB</small></li>
+  </ul>
+  <ul class="list-unstyled bordered col-xs-3" ng-repeat="key in storageTypeOrder">
+    <li d3-arc 
+      width="97"
+      border="4"
+      percentage="report.metrics[key].count.percentCapUsed.count"
+      foreground-color="{{chartColors[$index].hex}}">
+    </li>
+    <li class="title {{chartColors[$index].color}}">{{report.metrics[key].name}}</li>
+    <li class="count" ng-repeat="countKey in storageOrder">{{report.metrics[key].count[countKey].count}} <small>TB</small></li>
+  </ul>
+</div>

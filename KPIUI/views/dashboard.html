@@ -1,0 +1,76 @@
+<section id="dashboard" class="container-fluid pl-0 pr-0" ng-class="setKeys">
+<div style="width:{{scrollWidth}};">
+
+  <aside class="container metrics-keys" ng-click="scrollLeft()">
+    <div class="row header">
+      <div class="col-xs-12" ng-click="$event.stopPropagation();">
+        <div class="dropdown employee">
+          <button class="btn dropdown-toggle" type="button">
+            <span class="icon-menu-white">Org</span>
+          </button>
+          
+          <org-dropdown 
+            org-tree="employees"
+            on-click-link="update(uid)"></org-dropdown>
+        </div>
+      </div>
+    </div>
+
+    <div ng-if="summary.reportInfo[key]" ng-repeat="key in reportsOrder" ng-class="key" class="row key">
+      <div class="stem">
+        <h2>{{summary.reportInfo[key].name}}</h2> <span class="icon icon-{{key}}"></span>
+      </div>
+
+      <!-- only works for storage secondary keys -->
+      <ul ng-if="key === 'storage'" class="list-unstyled bordered">
+        <li ng-repeat="orderKey in storageOrder">{{summary.reportInfo[key].total[orderKey].name}}</li>
+      </ul>
+    </div>
+  </aside>
+
+  <article ng-if="summary.reportInfo" class="container kpi-metrics summary">
+    <div class="row header">
+      <div class="col-xs-12">
+        <p>{{employees[0].firstName | lowercase}} {{employees[0].lastName | lowercase}}'s Organization</p>
+        <h2>summary <small ng-if="managerUID" ng-click="update(managerUID)" title="jump up one level">jump up one level</small></h2>
+      </div>
+    </div>
+
+
+    <reports ng-repeat="key in reportsOrder" template="key" report="summary.reportInfo[key]"></reports>
+  </article>
+  
+  <!-- only check to see if the first employee has motsData -->
+  <article 
+    ng-if="employees[0].reportInfo.hardware.total.totalServers.count != 0 && employees[0].motsData" 
+    class="container kpi-metrics">
+    <div class="row header">
+      <div class="col-xs-12">
+        <employee-dropdown
+          employee="employees[0]"
+          on-click-link="update(uid)"></employee-dropdown>
+      </div>
+    </div>
+    
+    <reports ng-repeat="key in reportsOrder" template="key" report="employees[0].reportInfo[key]"></reports>
+  </article>
+
+  <!-- !$first to skip the first employee -->
+  <article 
+    ng-if="employee.reportInfo.hardware.total.totalServers.count != 0 && !$first" 
+    ng-repeat="employee in employees track by $index"
+    class="container kpi-metrics">
+    <div class="row header">
+      <div class="col-xs-12">
+        <employee-dropdown
+          employee="employee"
+          on-click-link="update(uid)"></employee-dropdown>
+      </div>
+    </div>
+    
+    <reports ng-repeat="key in reportsOrder" template="key" report="employee.reportInfo[key]"></reports>
+  </article>
+
+  
+</div>
+</section>

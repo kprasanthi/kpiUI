@@ -1,0 +1,31 @@
+<ul class="dropdown-menu list-unstyled bordered" role="menu">
+  <li>
+    {{orgTree[0].lastName}}, {{orgTree[0].firstName}}
+
+    <ul>
+      <li 
+      ng-repeat="employee in orgTree"
+      ng-if="$index"
+      ng-class="{open : !isCollapsed, empty : !employee.report}">
+        
+        <a 
+        ng-click="isCollapsed = !isCollapsed"
+        ng-model="isCollapsed"
+        title="{{employee.lastName}}, {{employee.firstName}}">{{employee.lastName}}, {{employee.firstName}}</a>
+
+        <ul ng-if="employee.employees" class="collapse" collapse="isCollapsed">
+          <li ng-repeat="emps in employee.employees">
+            <a 
+              ng-if="emps.report || emps.motsData" 
+              ng-click="onClickLink({uid:emps.attID})" 
+              title="{{emps.lastName}}, {{emps.firstName}}">{{emps.lastName}}, {{emps.firstName}}</a>
+            <a
+              class="empty"
+              ng-if="!emps.report && !emps.motsData"
+              title="{{emps.lastName}}, {{emps.firstName}}">{{emps.lastName}}, {{emps.firstName}}</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>

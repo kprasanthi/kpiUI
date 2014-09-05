@@ -1,0 +1,14 @@
+<div class="row metric" ng-class="template">
+  <div class="col-xs-12">
+    <h2>{{report.total.totalServers.name}} <span>{{report.total.totalServers.count}}</span></h2>
+  </div>
+
+  <div class="col-xs-12">
+    <ul class="list-inline flex">
+      <li ng-repeat="item in report.metrics">
+        <span class="title">{{item.name}}</span>
+        <span class="count">{{item.count}}</span>
+      </li> 
+    </ul>
+  </div>
+</div>

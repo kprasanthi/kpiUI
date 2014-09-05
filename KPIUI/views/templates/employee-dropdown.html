@@ -1,0 +1,46 @@
+<div class="dropdown employee">
+  <button class="btn dropdown-toggle" type="button">
+    {{employee.lastName}} ,{{employee.firstName}}
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu list-unstyled bordered" role="menu">
+    <li class="head">
+      <div class="pull-left" ng-class="{empty : !employee.image}">
+        <img src="" height="73" width="73" alt=""></img>
+      </div>
+      <div class="pull-right">
+      <span class="name">{{employee.firstName}}<br />{{employee.lastName}}</span>
+        {{employee.title}}
+      </div>
+    </li>
+    <li>
+      <span class="icon-phone-blue"></span>
+
+      <div class="pull-left">
+        phone
+        <span class="count">{{employee.phone | ifEmpty:"N/A"}}</span>
+      </div>
+    </li>
+    <li>
+      <span class="icon-email-blue"></span>
+
+      <div class="pull-left">
+        email
+        <a class="count" ng-href="mailto:{{employee.email}}">{{employee.email}}</a>
+      </div>
+    </li>
+    <li>
+      <span class="icon-lightbulb-blue"></span>
+
+      <div class="pull-left">
+        Q Presence
+        <a class="count" ng-href="qto://talk/{{employee.attID}}">online</a>
+      </div>
+    </li>
+    <li class="no-border">
+      <a class="btn btn-lg xl-btn btn-block btn-generate-report" data-loading-text="generating report" ng-click="onClickLink({uid:employee.attID})">
+        <span class="icon-menu-blue text">view direct reports</span>
+      </a>
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,24 @@
+<div ng-class="template" class="row metric">
+  <div class="col-xs-12">
+    <h2>{{report.total.totalApplicationsFromMots.name}} <span class="pull-right">{{report.total.totalApplicationsFromMots.count}}</span></h2>
+
+    <ul class="list-unstyled bordered">
+      <li>
+        <span class="count">{{report.metrics.appSpi.count}}</span>
+        {{report.metrics.appSpi.name}}
+      </li>
+      <li>
+        <span class="count">{{report.metrics.appStrategicDataAssets.count}}</span>
+        {{report.metrics.appStrategicDataAssets.name}}
+      </li>
+      <li>
+        <span class="count">{{report.metrics.appFeeds3rdParties.count}}</span>
+        {{report.metrics.appFeeds3rdParties.name}}
+      </li>
+      <li>
+        <span class="count">{{report.metrics.appInternationalData.count}}</span>
+        {{report.metrics.appInternationalData.name}}
+      </li>
+    </ul>
+  </div>
+</div>
